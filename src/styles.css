@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Figtree", "Segoe UI", sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --color-paper: #f3eee4;
+  --color-surface: #fffdf8;
+  --color-ink: #1c1915;
+  --color-muted: #6e675e;
+  --color-line: #e3d8c8;
+  --color-binding: #1f5c45;
+  --color-binding-hover: #174836;
+  --color-on-binding: #f3f7f4;
+  --color-binding-soft: #e5f0ea;
+  --color-overdue: #8e2f2f;
+  --color-overdue-soft: #f8e8e4;
+  --radius-card: 1rem;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    line-height: 1.5;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-binding);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 font-semibold transition-colors;
+  }
+  .btn:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+  .btn-primary {
+    @apply bg-binding text-on-binding;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-binding-hover);
+  }
+  .btn-line {
+    @apply border border-line bg-surface text-ink;
+  }
+  .btn-line:hover:not(:disabled) {
+    @apply bg-paper;
+  }
+  .field {
+    @apply min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-ink;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+  .nav-link {
+    @apply inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full px-3 text-sm font-semibold text-muted;
+  }
+  .nav-link[data-status="active"] {
+    @apply bg-binding text-on-binding;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
